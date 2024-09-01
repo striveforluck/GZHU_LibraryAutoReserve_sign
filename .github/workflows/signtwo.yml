@@ -1,33 +1,33 @@
-# name: sign
+name: sign
 
-# on:
-#   push:
-#     branches: 
-#       - main
-#       - master
-#   schedule:  # 开启定时需要把这两行前面的“#”删掉
-#     - cron: '50 04 * * *'     # 每天 UTC 04:50 (北京时间 12:50)
-#     - cron: '55 04 * * *'     # 每天 UTC 04:55 (北京时间 12:55)
-#     - cron: '31 05 * * *'     #运行的时间，时区问题实际运行+8h，例为每天13：30分运行
-#   workflow_dispatch:
+on:
+  push:
+    branches: 
+      - main
+      - master
+  schedule:  # 开启定时需要把这两行前面的“#”删掉
+    - cron: '50 04 * * *'     # 每天 UTC 04:50 (北京时间 12:50)
+    - cron: '55 04 * * *'     # 每天 UTC 04:55 (北京时间 12:55)
+    - cron: '31 05 * * *'     #运行的时间，时区问题实际运行+8h，例为每天13：30分运行
+  workflow_dispatch:
 
-# jobs:
-#   sign:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: 'Checkout'
-#         uses: actions/checkout@v3
-#       - name: 'Set up Python'
-#         uses: actions/setup-python@v4
-#         with:
-#           python-version: 3.11
-#       - name: 'Install requirements'
-#         run: pip install -r requirements.txt
-#       - name: 'sign'
-#         env:
-#           USERNAME: ${{ secrets.USERNAME }} # 学号
-#           PASSWORD: ${{ secrets.PASSWORD }} # 密码
-#           DEVNAME: ${{ secrets.DEVNAME }}   # 座位号
-#           PERIODS: ${{ secrets.PERIODS }}   # 时间段
-#           PUSHPLUS: ${{ secrets.PUSHPLUS }}
-#         run: python3 sign.py
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+      - name: 'Set up Python'
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: 'Install requirements'
+        run: pip install -r requirements.txt
+      - name: 'sign'
+        env:
+          USERNAME: ${{ secrets.USERNAME }} # 学号
+          PASSWORD: ${{ secrets.PASSWORD }} # 密码
+          DEVNAME: ${{ secrets.DEVNAME }}   # 座位号
+          PERIODS: ${{ secrets.PERIODS }}   # 时间段
+          PUSHPLUS: ${{ secrets.PUSHPLUS }}
+        run: python3 sign.py
